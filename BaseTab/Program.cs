@@ -18,9 +18,9 @@ namespace BaseTab
     class Program
     {
         // Variable des valeurs (Initialisé avec les valeurs par défaut)
-        static int quantiteValeur = 10;
-        static int maximumValeur = 20;
-        static int colonneValeur = 1;
+        static int quantiteValeur = 1000;
+        static int maximumValeur = 1000;
+        static int colonneValeur = 20;
 
         // Booléen de sortie du programme
         static bool quitter;
@@ -65,12 +65,16 @@ namespace BaseTab
             Console.WriteLine(" 1. Modifier la quantité de valeur à générer (Valeur actuelle : {0})", quantiteValeur);
             Console.WriteLine(" 2. Modifier la valeur maximum (Valeur actuelle : {0})", maximumValeur);
             Console.WriteLine(" 3. Modifier le nombre de colonne de l'affichage (Valeur actuelle : {0})", colonneValeur);
+            Console.WriteLine();
             Console.WriteLine(" 4. Générer les nombres aléatoires");
+            Console.WriteLine();
             Console.WriteLine(" 5. Trier les valeurs avec un trie à bulles");
             Console.WriteLine(" 6. Trier les valeurs avec un trie par insertion");
             Console.WriteLine(" 7. Trier les valeurs avec un trie par sélection");
-            Console.WriteLine(" 8. Afficher le tableaux des valeurs");
-            Console.WriteLine(" 9. Quitter");
+            Console.WriteLine(" 8. Chronomètre des différents tries");
+            Console.WriteLine();
+            Console.WriteLine(" 9. Afficher le tableaux des valeurs");
+            Console.WriteLine(" 10. Quitter");
             Console.WriteLine();
         }
 
@@ -99,7 +103,7 @@ namespace BaseTab
                 }
 
                 // Test si la valeur saisie entre dans le menu
-                if (choix == 0 | choix > 9) { saisieIncorrect = true; }
+                if (choix == 0 | choix > 10) { saisieIncorrect = true; }
 
                 // Affiche un message d'erreur si besoin
                 if (saisieIncorrect) { AfficherErreur("Saisie incorrect !"); }
@@ -146,11 +150,15 @@ namespace BaseTab
                     TrierSelection();
                     quitter = false;
                     break;
-                case 8: // Affichage de la liste de valeurs
+                case 8: // Chronomètre des méthode de trie
+                    TrierChrono();
+                    quitter = false;
+                    break;
+                case 9: // Affichage de la liste de valeurs
                     AfficherNombre();
                     quitter = false;
                     break;
-                case 9: // Quitter le programme
+                case 10: // Quitter le programme
                     quitter = true;
                     break;
             }
@@ -215,10 +223,15 @@ namespace BaseTab
             AfficherAppuyerContinuer(); // Demande l'appuie d'une touche pour continuer
         }
 
+        static void TrierBulle()
+        {
+            TrierBulle(listValeurs);
+        }
+
         /// <summary>
         /// Trie la liste des valeurs avec un trie à bulle (BubbleSort).
         /// </summary>
-        static void TrierBulle()
+        static void TrierBulle(List<int> ar)
         {
             AfficherEnTete("TRIE DES VALEURS");
 
@@ -228,9 +241,9 @@ namespace BaseTab
             {
                 valeurEchange = false;
 
-                for (int index = 0; index < listValeurs.Count - 1; index++)
+                for (int index = 0; index < ar.Count - 1; index++)
                 {
-                    if (listValeurs[index] > listValeurs[index + 1])
+                    if (ar[index] > ar[index + 1])
                     {
                         PermuterNombre(index, index + 1);
 
@@ -244,54 +257,64 @@ namespace BaseTab
             AfficherAppuyerContinuer();
         }
 
+        static void TrierInsertion()
+        {
+            TrierInsertion(listValeurs);
+        }
+
         /// <summary>
         /// Trie la liste des valeurs avec un trie à insertion (InsertSort).
         /// </summary>
-        static void TrierInsertion()
+        static void TrierInsertion(List<int> ar)
         {
-            AfficherEnTete("TRIE DES VALEURS");
+            AfficherEnTete("TRI DES VALEURS");
 
             int a, j, i;
 
-            for (i = 1; i < listValeurs.Count; i ++)
+            for (i = 1; i < ar.Count; i ++)
             {
 
-                a = listValeurs[i];
+                a = ar[i];
 
                 for (j = i; j >= 0; j--)
                 {
-                    if (j == 0 || listValeurs[j-1] < a)
+                    if (j == 0 || ar[j-1] < a)
                     {
-                        listValeurs[j] = a;
+                        ar[j] = a;
                         break;
-                    } else if (listValeurs[j- 1] > a)
+                    } else if (ar[j- 1] > a)
                     {
-                        listValeurs[j] = listValeurs[j - 1];
+                        ar[j] = ar[j - 1];
                     }
                 }
             }
 
-            Console.WriteLine("Trie terminé !");
+            Console.WriteLine("Tri terminé !");
 
             AfficherAppuyerContinuer();
+        }
+
+        static void TrierSelection()
+        {
+            TrierSelection(listValeurs);
         }
 
         /// <summary>
         /// Trie la liste des valeurs avec un trie par sélection.
         /// </summary>
-        static void TrierSelection()
+        static void TrierSelection(List<int> ar)
         {
-            AfficherEnTete("TRIE DES VALEURS");
+            AfficherEnTete("TRI DES VALEURS");
 
             int i, min, j, x;
 
-            for (i = 0; i < listValeurs.Count - 1; i++)
+            for (i = 0; i < ar.Count - 1; i++)
             {
                 min = i;
 
-                for (j = i + 1; j < listValeurs.Count; j ++)
+                for (j = i + 1; j < ar.Count; j ++)
                 {
-                    if (listValeurs[j] < listValeurs[min] )
+                    if (ar[j] < ar[min] )
                     {
                         min = j;
                     }
@@ -299,15 +322,58 @@ namespace BaseTab
 
                 if (min != i)
                 {
-                    x = listValeurs[i];
-                    listValeurs[i] = listValeurs[min];
-                    listValeurs[min] = x;
+                    x = ar[i];
+                    ar[i] = ar[min];
+                    ar[min] = x;
                 } 
             }
 
-            Console.WriteLine("Trie terminé !");
+            Console.WriteLine("Tri terminé !");
 
             AfficherAppuyerContinuer();
+        }
+
+        static void TrierChrono()
+        {
+            AfficherEnTete("CHRONOMETRE DES TRIS");
+
+            List<int> bulles = new List<int>(listValeurs);
+            List<int> insertion = new List<int>(listValeurs);
+            List<int> selection = new List<int>(listValeurs);
+
+            System.Diagnostics.Stopwatch stopwatch = StartTimer();
+            TrierBulle(bulles);
+            String resultatBulle = StopTimer(stopwatch);
+
+            stopwatch = StartTimer();
+            TrierInsertion(insertion);
+            String resultatInsertion = StopTimer(stopwatch);
+
+            stopwatch = StartTimer();
+            TrierSelection(selection);
+            String resultatSelection = StopTimer(stopwatch);
+
+            Console.WriteLine("Tri à bulles terminé ! Tps : " + resultatBulle);
+            Console.WriteLine("Tri par insertion terminé ! Tps : " + resultatInsertion);
+            Console.WriteLine("Tri par sélection terminé ! Tps : " + resultatSelection);
+
+            AfficherAppuyerContinuer();
+        }
+
+        static System.Diagnostics.Stopwatch StartTimer()
+        {
+            System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
+            stopwatch.Start();
+            return stopwatch;
+        }
+
+        static string StopTimer(System.Diagnostics.Stopwatch stopwatch)
+        {
+            stopwatch.Stop();
+            TimeSpan ts = stopwatch.Elapsed;
+            return String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                ts.Hours, ts.Minutes, ts.Seconds,
+                ts.Milliseconds / 10);
         }
 
         /// <summary>
