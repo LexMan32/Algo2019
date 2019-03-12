@@ -67,8 +67,10 @@ namespace BaseTab
             Console.WriteLine(" 3. Modifier le nombre de colonne de l'affichage (Valeur actuelle : {0})", colonneValeur);
             Console.WriteLine(" 4. Générer les nombres aléatoires");
             Console.WriteLine(" 5. Trier les valeurs avec un trie à bulles");
-            Console.WriteLine(" 6. Afficher le tableaux des valeurs");
-            Console.WriteLine(" 7. Quitter");
+            Console.WriteLine(" 6. Trier les valeurs avec un trie par insertion");
+            Console.WriteLine(" 7. Trier les valeurs avec un trie par sélection");
+            Console.WriteLine(" 8. Afficher le tableaux des valeurs");
+            Console.WriteLine(" 9. Quitter");
             Console.WriteLine();
         }
 
@@ -97,7 +99,7 @@ namespace BaseTab
                 }
 
                 // Test si la valeur saisie entre dans le menu
-                if (choix == 0 | choix > 7) { saisieIncorrect = true; }
+                if (choix == 0 | choix > 9) { saisieIncorrect = true; }
 
                 // Affiche un message d'erreur si besoin
                 if (saisieIncorrect) { AfficherErreur("Saisie incorrect !"); }
@@ -133,14 +135,22 @@ namespace BaseTab
                     quitter = false;
                     break;
                 case 5: // Trie de la liste
+                    TrierBulle();
+                    quitter = false;
+                    break;
+                case 6: // Trie de la liste
                     TrierInsertion();
                     quitter = false;
                     break;
-                case 6: // Affichage de la liste de valeurs
+                case 7: // Trie de la liste
+                    TrierSelection();
+                    quitter = false;
+                    break;
+                case 8: // Affichage de la liste de valeurs
                     AfficherNombre();
                     quitter = false;
                     break;
-                case 7: // Quitter le programme
+                case 9: // Quitter le programme
                     quitter = true;
                     break;
             }
@@ -210,33 +220,28 @@ namespace BaseTab
         /// </summary>
         static void TrierBulle()
         {
-            AfficherEnTete("TRIE DES VALEURS");   // Affiche l'en-tête
+            AfficherEnTete("TRIE DES VALEURS");
 
-            bool valeurEchange; // Variable d'un échange
+            bool valeurEchange;
 
             do
             {
-                valeurEchange = false; // On réinitialise la variable pour savoir un changement
+                valeurEchange = false;
 
-                // Pour chacun des éléments de la liste de valeur
                 for (int index = 0; index < listValeurs.Count - 1; index++)
                 {
-                    // Si la valeur suivante est plus grande
                     if (listValeurs[index] > listValeurs[index + 1])
                     {
-                        // On inverse les valeurs
                         PermuterNombre(index, index + 1);
 
-                        // On change la variable d'un changement
                         valeurEchange = true;
                     }
                 }
-            } while (valeurEchange == true); // Tant qu'une valeur a été changé, on recommence
+            } while (valeurEchange == true);
 
-            // Message de fin du trie
             Console.WriteLine("Trie terminé !");
 
-            AfficherAppuyerContinuer(); // Demande l'appuie d'une touche pour continuer
+            AfficherAppuyerContinuer();
         }
 
         /// <summary>
@@ -244,30 +249,31 @@ namespace BaseTab
         /// </summary>
         static void TrierInsertion()
         {
-            AfficherEnTete("TRIE DES VALEURS");   // Affiche l'en-tête
+            AfficherEnTete("TRIE DES VALEURS");
 
-            for (int index = 1; index < listValeurs.Count; index ++)
+            int a, j, i;
+
+            for (i = 1; i < listValeurs.Count; i ++)
             {
 
-                int nbrAInserer = listValeurs[index];
-                int posRecherche = index;
+                a = listValeurs[i];
 
-                while (nbrAInserer < listValeurs[index - 1] && posRecherche - 1 >= 1)
+                for (j = i; j >= 0; j--)
                 {
-                    listValeurs[posRecherche] = listValeurs[posRecherche - 1];
-                    posRecherche = posRecherche - 1;
-
-
-
+                    if (j == 0 || listValeurs[j-1] < a)
+                    {
+                        listValeurs[j] = a;
+                        break;
+                    } else if (listValeurs[j- 1] > a)
+                    {
+                        listValeurs[j] = listValeurs[j - 1];
+                    }
                 }
-
-                listValeurs[posRecherche] = nbrAInserer;
             }
 
-            // Message de fin du trie
             Console.WriteLine("Trie terminé !");
 
-            AfficherAppuyerContinuer(); // Demande l'appuie d'une touche pour continuer
+            AfficherAppuyerContinuer();
         }
 
         /// <summary>
@@ -275,28 +281,33 @@ namespace BaseTab
         /// </summary>
         static void TrierSelection()
         {
-            AfficherEnTete("TRIE DES VALEURS");   // Affiche l'en-tête
+            AfficherEnTete("TRIE DES VALEURS");
 
-            for (int index = 0; index < listValeurs.Count; index++)
+            int i, min, j, x;
+
+            for (i = 0; i < listValeurs.Count - 1; i++)
             {
-                int indexEchange = index;
+                min = i;
 
-                for (int indexScan = index + 1; indexScan < listValeurs.Count; indexScan ++)
+                for (j = i + 1; j < listValeurs.Count; j ++)
                 {
-                    if (listValeurs[indexEchange] > listValeurs[indexScan] )
+                    if (listValeurs[j] < listValeurs[min] )
                     {
-                        indexEchange = indexScan;
+                        min = j;
                     }
-
                 }
 
-                PermuterNombre(index, indexEchange);
+                if (min != i)
+                {
+                    x = listValeurs[i];
+                    listValeurs[i] = listValeurs[min];
+                    listValeurs[min] = x;
+                } 
             }
 
-            // Message de fin du trie
             Console.WriteLine("Trie terminé !");
 
-            AfficherAppuyerContinuer(); // Demande l'appuie d'une touche pour continuer
+            AfficherAppuyerContinuer();
         }
 
         /// <summary>
