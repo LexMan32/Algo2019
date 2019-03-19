@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseTab", "BaseTab\BaseTab.csproj", "{B218AB71-E346-47D8-83C4-DF190B065C86}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuiteFibonacci", "SuiteFibonacci\SuiteFibonacci.csproj", "{364874FD-854D-4E0E-89FC-388D9B0F74ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B218AB71-E346-47D8-83C4-DF190B065C86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B218AB71-E346-47D8-83C4-DF190B065C86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B218AB71-E346-47D8-83C4-DF190B065C86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{364874FD-854D-4E0E-89FC-388D9B0F74ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{364874FD-854D-4E0E-89FC-388D9B0F74ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{364874FD-854D-4E0E-89FC-388D9B0F74ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{364874FD-854D-4E0E-89FC-388D9B0F74ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
