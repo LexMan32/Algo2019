@@ -67,15 +67,14 @@ namespace BaseTab
             Console.WriteLine(" 3. Modifier le nombre de colonne de l'affichage (Valeur actuelle : {0})", colonneValeur);
             Console.WriteLine();
             Console.WriteLine(" 4. Générer les nombres aléatoires");
+            Console.WriteLine(" 5. Afficher le tableaux des valeurs");
+            Console.WriteLine(" 6. Quitter");
             Console.WriteLine();
-            Console.WriteLine(" 5. Trier les valeurs avec un trie à bulles");
-            Console.WriteLine(" 6. Trier les valeurs avec un trie par insertion");
-            Console.WriteLine(" 7. Trier les valeurs avec un trie par sélection");
-            Console.WriteLine(" 8. Chronomètre des différents tries");
-            Console.WriteLine();
-            Console.WriteLine(" 9. Afficher le tableaux des valeurs");
-            Console.WriteLine(" 10. Quitter");
-            Console.WriteLine();
+            Console.WriteLine(" 10. Trier les valeurs avec un trie à bulles");
+            Console.WriteLine(" 11. Trier les valeurs avec un trie par insertion");
+            Console.WriteLine(" 12. Trier les valeurs avec un trie par sélection");
+            Console.WriteLine(" 13. Trier les valeurs avec un trie par sélection");
+            Console.WriteLine(" 20. Chronomètre des différents tries");
         }
 
         /// <summary>
@@ -138,29 +137,34 @@ namespace BaseTab
                     GenererNombre();
                     quitter = false;
                     break;
-                case 5: // Trie de la liste
-                    TrierBulle();
-                    quitter = false;
-                    break;
-                case 6: // Trie de la liste
-                    TrierInsertion();
-                    quitter = false;
-                    break;
-                case 7: // Trie de la liste
-                    TrierSelection();
-                    quitter = false;
-                    break;
-                case 8: // Chronomètre des méthode de trie
-                    TrierChrono();
-                    quitter = false;
-                    break;
-                case 9: // Affichage de la liste de valeurs
+                case 5: // Affichage de la liste de valeurs
                     AfficherNombre();
                     quitter = false;
                     break;
-                case 10: // Quitter le programme
+                case 6: // Quitter le programme
                     quitter = true;
                     break;
+                case 10: // Trie de la liste
+                    TrierBulle();
+                    quitter = false;
+                    break;
+                case 11: // Trie de la liste
+                    TrierInsertion();
+                    quitter = false;
+                    break;
+                case 12: // Trie de la liste
+                    TrierSelection();
+                    quitter = false;
+                    break;
+                case 13: // Trie de la liste
+                    TrierQuickShort();
+                    quitter = false;
+                    break;
+                case 20: // Chronomètre des méthode de trie
+                    TrierChrono();
+                    quitter = false;
+                    break;
+                
             }
         }
 
@@ -228,9 +232,6 @@ namespace BaseTab
             TrierBulle(listValeurs);
         }
 
-        /// <summary>
-        /// Trie la liste des valeurs avec un trie à bulle (BubbleSort).
-        /// </summary>
         static void TrierBulle(List<int> ar)
         {
             AfficherEnTete("TRIE DES VALEURS");
@@ -262,9 +263,6 @@ namespace BaseTab
             TrierInsertion(listValeurs);
         }
 
-        /// <summary>
-        /// Trie la liste des valeurs avec un trie à insertion (InsertSort).
-        /// </summary>
         static void TrierInsertion(List<int> ar)
         {
             AfficherEnTete("TRI DES VALEURS");
@@ -299,9 +297,6 @@ namespace BaseTab
             TrierSelection(listValeurs);
         }
 
-        /// <summary>
-        /// Trie la liste des valeurs avec un trie par sélection.
-        /// </summary>
         static void TrierSelection(List<int> ar)
         {
             AfficherEnTete("TRI DES VALEURS");
@@ -331,6 +326,26 @@ namespace BaseTab
             Console.WriteLine("Tri terminé !");
 
             AfficherAppuyerContinuer();
+        }
+
+        static void TrierQuickShort()
+        {
+            TrierQuickShort(listValeurs);
+        }
+
+        static void TrierQuickShort(List<int> ar, int gauche, int droite)
+        {
+            if (gauche < droite)
+            {
+                int pivot = Partition(arr, left right) {
+
+                }
+            }
+        }
+
+        static void QuickShort()
+        {
+
         }
 
         static void TrierChrono()
