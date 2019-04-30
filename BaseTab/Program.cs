@@ -18,9 +18,9 @@ namespace BaseTab
     class Program
     {
         // Variable des valeurs (Initialisé avec les valeurs par défaut)
-        static int quantiteValeur = 1000;
-        static int maximumValeur = 1000;
-        static int colonneValeur = 20;
+        static int quantiteValeur = 100;
+        static int maximumValeur = 100;
+        static int colonneValeur = 10;
 
         // Booléen de sortie du programme
         static bool quitter;
@@ -73,8 +73,9 @@ namespace BaseTab
             Console.WriteLine(" 10. Trier les valeurs avec un trie à bulles");
             Console.WriteLine(" 11. Trier les valeurs avec un trie par insertion");
             Console.WriteLine(" 12. Trier les valeurs avec un trie par sélection");
-            Console.WriteLine(" 13. Trier les valeurs avec un trie par sélection");
+            Console.WriteLine(" 13. Trier les valeurs avec un trie rapide (QuickSort)");
             Console.WriteLine(" 20. Chronomètre des différents tries");
+            Console.WriteLine();
         }
 
         /// <summary>
@@ -102,7 +103,7 @@ namespace BaseTab
                 }
 
                 // Test si la valeur saisie entre dans le menu
-                if (choix == 0 | choix > 10) { saisieIncorrect = true; }
+                if (choix == 0 | choix > 21) { saisieIncorrect = true; }
 
                 // Affiche un message d'erreur si besoin
                 if (saisieIncorrect) { AfficherErreur("Saisie incorrect !"); }
@@ -230,6 +231,10 @@ namespace BaseTab
         static void TrierBulle()
         {
             TrierBulle(listValeurs);
+
+            Console.WriteLine("Trie terminé !");
+
+            AfficherAppuyerContinuer();
         }
 
         static void TrierBulle(List<int> ar)
@@ -252,15 +257,15 @@ namespace BaseTab
                     }
                 }
             } while (valeurEchange == true);
-
-            Console.WriteLine("Trie terminé !");
-
-            AfficherAppuyerContinuer();
         }
 
         static void TrierInsertion()
         {
             TrierInsertion(listValeurs);
+
+            Console.WriteLine("Tri terminé !");
+
+            AfficherAppuyerContinuer();
         }
 
         static void TrierInsertion(List<int> ar)
@@ -286,15 +291,15 @@ namespace BaseTab
                     }
                 }
             }
-
-            Console.WriteLine("Tri terminé !");
-
-            AfficherAppuyerContinuer();
         }
 
         static void TrierSelection()
         {
             TrierSelection(listValeurs);
+
+            Console.WriteLine("Tri terminé !");
+
+            AfficherAppuyerContinuer();
         }
 
         static void TrierSelection(List<int> ar)
@@ -322,30 +327,61 @@ namespace BaseTab
                     ar[min] = x;
                 } 
             }
+        }
+
+        static void TrierQuickShort()
+        {
+            TrierQuickShort(listValeurs, 0, listValeurs.Count - 1);
 
             Console.WriteLine("Tri terminé !");
 
             AfficherAppuyerContinuer();
         }
 
-        static void TrierQuickShort()
-        {
-            TrierQuickShort(listValeurs);
-        }
-
-        static void TrierQuickShort(List<int> ar, int gauche, int droite)
+        static void TrierQuickShort(List<int> arr, int gauche, int droite)
         {
             if (gauche < droite)
             {
-                int pivot = Partition(arr, left right) {
+                int pivot = Partition(arr, gauche, droite);
 
+                if (pivot > 1)
+                {
+                    TrierQuickShort(arr, gauche, pivot - 1);
+                }
+                if (pivot + 1 < droite)
+                {
+                    TrierQuickShort(arr, pivot + 1, droite);
                 }
             }
         }
-
-        static void QuickShort()
+        private static int Partition(List<int> arr, int gauche, int droite)
         {
+            int pivot = arr[gauche];
+            while (true)
+            {
+                while (arr[gauche] < pivot)
+                {
+                    gauche++;
+                }
 
+                while (arr[droite] > pivot)
+                {
+                    droite--;
+                }
+
+                if (gauche < droite)
+                {
+                    if (arr[gauche] == arr[droite]) return droite;
+
+                    int temp = arr[gauche];
+                    arr[gauche] = arr[droite];
+                    arr[droite] = temp;
+                }
+                else
+                {
+                    return droite;
+                }
+            }
         }
 
         static void TrierChrono()
@@ -355,6 +391,7 @@ namespace BaseTab
             List<int> bulles = new List<int>(listValeurs);
             List<int> insertion = new List<int>(listValeurs);
             List<int> selection = new List<int>(listValeurs);
+            List<int> quicksort = new List<int>(listValeurs);
 
             System.Diagnostics.Stopwatch stopwatch = StartTimer();
             TrierBulle(bulles);
@@ -368,9 +405,14 @@ namespace BaseTab
             TrierSelection(selection);
             String resultatSelection = StopTimer(stopwatch);
 
+            stopwatch = StartTimer();
+            TrierQuickShort(quicksort, 0, listValeurs.Count - 1);
+            String resultatQuicksort = StopTimer(stopwatch);
+
             Console.WriteLine("Tri à bulles terminé ! Tps : " + resultatBulle);
             Console.WriteLine("Tri par insertion terminé ! Tps : " + resultatInsertion);
             Console.WriteLine("Tri par sélection terminé ! Tps : " + resultatSelection);
+            Console.WriteLine("Tri quicksort terminé ! Tps : " + resultatQuicksort);
 
             AfficherAppuyerContinuer();
         }
