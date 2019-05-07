@@ -127,8 +127,10 @@ namespace SuiteFibonacci
         {
             AfficherEnTete("Calculer le nombre de Fibonacci");
 
+            nbrTour = 0;
+
             Console.Write("Entrer le terme de Finonacci désiré : ");
-            Console.WriteLine(" Le terme est le suivant : {0}", Fibonacci(int.Parse(Console.ReadLine()) - 1));
+            Console.WriteLine(" Le terme est le suivant : {0}", Fibonacci(int.Parse(Console.ReadLine()) - 1 ));
             Console.WriteLine(" Nombre d'appel de la méthode : {0}", nbrTour);
 
             AfficherAppuyerContinuer();
@@ -138,13 +140,11 @@ namespace SuiteFibonacci
         {
             nbrTour ++;
 
-            if (term <= 0)
+            if (term <= 1)
             {
-                return 0;
-            } else if (term == 1){
                 return 1;
             } else {
-                return Fibonacci(term - 2) + Fibonacci(term - 1);
+                return Fibonacci(term - 1) + Fibonacci(term - 2);
             }
         }
     }
