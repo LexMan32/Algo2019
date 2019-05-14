@@ -340,9 +340,11 @@ namespace BaseTab
 
         static void TrierQuickShort(List<int> arr, int gauche, int droite)
         {
+            int pivot;
+
             if (gauche < droite)
             {
-                int pivot = Partition(arr, gauche, droite);
+                pivot = Partition(arr, gauche, droite);
 
                 if (pivot > 1)
                 {
@@ -354,6 +356,7 @@ namespace BaseTab
                 }
             }
         }
+
         private static int Partition(List<int> arr, int gauche, int droite)
         {
             int pivot = arr[gauche];
@@ -373,9 +376,9 @@ namespace BaseTab
                 {
                     if (arr[gauche] == arr[droite]) return droite;
 
-                    int temp = arr[gauche];
-                    arr[gauche] = arr[droite];
-                    arr[droite] = temp;
+                    int temp = arr[droite];
+                    arr[droite] = arr[gauche];
+                    arr[gauche] = temp;
                 }
                 else
                 {
