@@ -340,51 +340,55 @@ namespace BaseTab
 
         static void TrierQuickShort(List<int> arr, int gauche, int droite)
         {
-            int pivot;
+            List<int> pivot;
 
             if (gauche < droite)
             {
                 pivot = Partition(arr, gauche, droite);
 
-                if (pivot > 1)
+                if (pivot[1] > gauche)
                 {
-                    TrierQuickShort(arr, gauche, pivot - 1);
+                    TrierQuickShort(arr, gauche, pivot[1]);
                 }
-                if (pivot + 1 < droite)
+                if (pivot[0] < droite)
                 {
-                    TrierQuickShort(arr, pivot + 1, droite);
+                    TrierQuickShort(arr, pivot[0], droite);
                 }
             }
         }
 
-        private static int Partition(List<int> arr, int gauche, int droite)
+        private static List<int> Partition(List<int> arr, int gauche, int droite)
         {
-            int pivot = arr[gauche];
-            while (true)
+            int pivot = arr[(gauche + droite) / 2];
+            do
             {
-                while (arr[gauche] < pivot)
+                while (arr[gauche] < pivot && gauche <= droite)
                 {
                     gauche++;
                 }
 
-                while (arr[droite] > pivot)
+                while (arr[droite] > pivot && gauche <= droite)
                 {
                     droite--;
                 }
 
-                if (gauche < droite)
+                if (gauche <= droite)
                 {
-                    if (arr[gauche] == arr[droite]) return droite;
-
                     int temp = arr[droite];
                     arr[droite] = arr[gauche];
                     arr[gauche] = temp;
+
+                    gauche++;
+                    droite--;
                 }
-                else
-                {
-                    return droite;
-                }
-            }
+                    
+            } while (gauche <= droite);
+
+            List<int> tmp = new List<int>();
+            tmp.Add(gauche);
+            tmp.Add(droite);
+
+            return tmp;
         }
 
         static void TrierChrono()
