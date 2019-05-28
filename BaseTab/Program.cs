@@ -5,8 +5,6 @@
  * Description  : Exercices BaseTab.
  * Auteur       : A.Morel
  * Email        : alexandre.morel@divtec.ch
- * Date         : 13.09.2017
- * Version      : 1.0 
  */
 
 using System;
@@ -17,7 +15,10 @@ namespace BaseTab
 {
     class Program
     {
-        // Variable des valeurs (Initialisé avec les valeurs par défaut)
+        // Nombre de possibilté du menu
+        static int nbrPosMenu = 20;
+
+        // Variables pour la configuration par défaut
         static int quantiteValeur = 100;
         static int maximumValeur = 100;
         static int colonneValeur = 10;
@@ -28,7 +29,7 @@ namespace BaseTab
         // Initilisation de la liste des valeurs
         static List<int> listValeurs = new List<int>();
 
-        // Générateur de nombres aléatoires
+        // Générateur pour les nombres aléatoires
         static Random genNbr = new Random();
 
         /// <summary>
@@ -37,18 +38,15 @@ namespace BaseTab
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            Console.Title = "Tableau de valeurs";   // Applique un titre à la console
+            Console.Title = "BaseTab - Morel Alexandre";
 
-
-            do  // Boucle pour la répétition du programme
+            do
             {
-                AfficherMenu();  // Affiche le menu avec les valeurs
+                AfficherMenu();
 
-                GestionChoix(SaisieChoix());    // Gestion du choix d'après la saisie
+                GestionChoix(SaisirChoixMenu());
 
             } while (!quitter);
-
-            // Fin du programme
         }
 
         /// <summary>
@@ -59,9 +57,8 @@ namespace BaseTab
         /// <param name="colonneAffichage">Nombre de colonne pour l'affichage</param>
         static void AfficherMenu()
         {
-            AfficherEnTete("MENU");   // Affiche l'en-tête
+            AfficherEnTete("MENU");
 
-            // Affichage le menu
             Console.WriteLine(" 1. Modifier la quantité de valeur à générer (Valeur actuelle : {0})", quantiteValeur);
             Console.WriteLine(" 2. Modifier la valeur maximum (Valeur actuelle : {0})", maximumValeur);
             Console.WriteLine(" 3. Modifier le nombre de colonne de l'affichage (Valeur actuelle : {0})", colonneValeur);
@@ -74,6 +71,7 @@ namespace BaseTab
             Console.WriteLine(" 11. Trier les valeurs avec un trie par insertion");
             Console.WriteLine(" 12. Trier les valeurs avec un trie par sélection");
             Console.WriteLine(" 13. Trier les valeurs avec un trie rapide (QuickSort)");
+            Console.WriteLine(" 14. Trier les valeurs avec un trie en n (bin sort)");
             Console.WriteLine(" 20. Chronomètre des différents tries");
             Console.WriteLine();
         }
@@ -82,15 +80,14 @@ namespace BaseTab
         /// Saisie du choix dans le menu pour l'utilisateur.
         /// </summary>
         /// <returns>Choix de l'utilisateur</returns>
-        static int SaisieChoix()
+        static int SaisirChoixMenu()
         {
-            bool saisieIncorrect = false;   // Booleen de saisie incorrect
+            bool saisieIncorrect = false;
 
-            int choix = 0;  // Choix saisie
+            int choix = 0;
 
-            do  // Boucle de répétition pour une saisie valide
+            do
             {
-                // Try / Catch pour vérifier la valeur saisie
                 try
                 {
                     Console.Write("Votre choix : ");
@@ -102,15 +99,13 @@ namespace BaseTab
                     saisieIncorrect = true;
                 }
 
-                // Test si la valeur saisie entre dans le menu
-                if (choix == 0 | choix > 21) { saisieIncorrect = true; }
+                if (choix <= 0 | choix > nbrPosMenu) { saisieIncorrect = true; }
 
-                // Affiche un message d'erreur si besoin
                 if (saisieIncorrect) { AfficherErreur("Saisie incorrect !"); }
 
             } while (saisieIncorrect);
 
-            return choix;   // Retourne la valeur choisie
+            return choix;
         }
 
         /// <summary>
@@ -119,50 +114,53 @@ namespace BaseTab
         /// <param name="choix">Valeur du choix</param>
         static void GestionChoix(int choix)
         {
-            // Sélection du l'étape suivante
             switch (choix)
             {
-                case 1: // Saisie de la valeur "Quantité"
+                case 1:
                     quantiteValeur = SaisieValeur();
                     quitter = false;
                     break;
-                case 2: // Saisie de la valeur "Maximum"
+                case 2:
                     maximumValeur = SaisieValeur();
                     quitter = false;
                     break;
-                case 3: // Saisie de la valeur "Colonne"
+                case 3:
                     colonneValeur = SaisieValeur();
                     quitter = false;
                     break;
-                case 4: // Génération des valeurs dans la liste
+                case 4:
                     GenererNombre();
                     quitter = false;
                     break;
-                case 5: // Affichage de la liste de valeurs
+                case 5:
                     AfficherNombre();
                     quitter = false;
                     break;
-                case 6: // Quitter le programme
+                case 6:
                     quitter = true;
                     break;
-                case 10: // Trie de la liste
+                case 10:
                     TrierBulle();
                     quitter = false;
                     break;
-                case 11: // Trie de la liste
+                case 11:
                     TrierInsertion();
                     quitter = false;
                     break;
-                case 12: // Trie de la liste
+                case 12:
                     TrierSelection();
                     quitter = false;
                     break;
-                case 13: // Trie de la liste
+                case 13:
                     TrierQuickShort();
                     quitter = false;
                     break;
-                case 20: // Chronomètre des méthode de trie
-                    TrierChrono();
+                case 14:
+                    TrierBinSort();
+                    quitter = false;
+                    break;
+                case 20:
+                    // TrierChrono();
                     quitter = false;
                     break;
                 
@@ -175,33 +173,29 @@ namespace BaseTab
         /// <returns>La valeur saisie</returns>
         static int SaisieValeur()
         {
-            AfficherEnTete("CHANGEMENT DE VALEUR"); // Affiche l'en-tête
+            AfficherEnTete("CHANGEMENT DE VALEUR");
 
-            int valeurEntree;   // valeur entrée par l'utilisateur
+            int valeurEntree;
 
-            do // Boucle tant que la valeur est inférieure ou égale à zéro
+            do
             {
-                try     // Try / Catch pour la valeur entrée
+                try
                 {
-                    // Invitation à saisir une valeur
                     Console.Write("Entrez la nouvelle valeur : ");
 
-                    // Chargement de la valeur
                     valeurEntree = int.Parse(Console.ReadLine());
 
-                    // Test si la valeur est non recevable <0
                     if (valeurEntree <= 0) { AfficherErreur("Saisie incorrect !"); }
                 }
                 catch (Exception)
                 {
-                    // Message d'erreur
                     AfficherErreur("Saisie incorrect !");
                     valeurEntree = 0;
                 }
             }
             while (valeurEntree <= 0);
 
-            return valeurEntree; // Retourne la valeur si elle est correct
+            return valeurEntree;
         }
 
         /// <summary>
@@ -209,54 +203,31 @@ namespace BaseTab
         /// </summary>
         static void GenererNombre()
         {
-            AfficherEnTete("GENERATION DES VALEURS");   // Affiche l'en-tête
+            AfficherEnTete("GENERATION DES VALEURS");
 
-            // Vide la liste de valeurs
             listValeurs.Clear();
 
-            // Boucle pour le chargement des valeurs d'après la quantité paramétré.
             int comptVal = quantiteValeur;
             while (comptVal != 0)
             {
-                // Ajoute un nombre aléatoire a la liste
                 listValeurs.Add(genNbr.Next(0, maximumValeur));
                 comptVal--;
             }
 
             Console.WriteLine("Les nombres ont été générés !");
 
-            AfficherAppuyerContinuer(); // Demande l'appuie d'une touche pour continuer
+            AfficherAppuyerContinuer();
         }
 
         static void TrierBulle()
         {
-            TrierBulle(listValeurs);
-
-            Console.WriteLine("Trie terminé !");
-
-            AfficherAppuyerContinuer();
-        }
-
-        static void TrierBulle(List<int> ar)
-        {
             AfficherEnTete("TRIE DES VALEURS");
 
-            bool valeurEchange;
+            BubbleSort.TrierBulle(listValeurs);
 
-            do
-            {
-                valeurEchange = false;
+            Console.WriteLine("Tri à bulles terminé !");
 
-                for (int index = 0; index < ar.Count - 1; index++)
-                {
-                    if (ar[index] > ar[index + 1])
-                    {
-                        PermuterNombre(index, index + 1);
-
-                        valeurEchange = true;
-                    }
-                }
-            } while (valeurEchange == true);
+            AfficherAppuyerContinuer();
         }
 
         static void TrierInsertion()
@@ -391,7 +362,51 @@ namespace BaseTab
             return tmp;
         }
 
-        static void TrierChrono()
+        static void TrierBinSort()
+        {
+            AfficherEnTete("TRI DES VALEURS");
+
+            TrierBinSort(listValeurs);
+
+            AfficherAppuyerContinuer();
+        }
+
+        static void TrierBinSort(List<int> ar)
+        {
+            List<int>[] arTrier = new List<int>[maximumValeur];
+
+            foreach (int valeur in ar)
+            {
+                List<int> arTmp = arTrier[valeur];
+
+                if (arTmp == null)
+                {
+                    arTmp = new List<int>();
+                    arTmp.Add(valeur);
+                    arTrier[valeur] = arTmp;
+                } else
+                {
+                    arTrier[valeur].Add(valeur);
+                }
+            }
+
+            ar.Clear();
+
+            foreach (List<int> lst in arTrier)
+            {
+                if (lst != null)
+                {
+                    foreach (int valeur in lst)
+                    {
+                        ar.Add(valeur);
+                    }
+                }
+            }
+
+            Console.WriteLine("Tri terminé !");
+        }
+
+        /* static void TrierChrono()
         {
             AfficherEnTete("CHRONOMETRE DES TRIS");
 
@@ -422,7 +437,7 @@ namespace BaseTab
             Console.WriteLine("Tri quicksort terminé ! Tps : " + resultatQuicksort);
 
             AfficherAppuyerContinuer();
-        }
+        } */
 
         static System.Diagnostics.Stopwatch StartTimer()
         {
@@ -438,18 +453,6 @@ namespace BaseTab
             return String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
                 ts.Hours, ts.Minutes, ts.Seconds,
                 ts.Milliseconds / 10);
-        }
-
-        /// <summary>
-        /// Permute les nombres contenu dans la liste entre l'index 1 et l'index 2.
-        /// </summary>
-        /// <param name="indexNombre1">Index du premier nombre</param>
-        /// <param name="indexNombre2">Index du second nombre</param>
-        static void PermuterNombre(int indexNombre1, int indexNombre2)
-        {
-            int valeurTmp = listValeurs[indexNombre1];
-            listValeurs[indexNombre1] = listValeurs[indexNombre2];
-            listValeurs[indexNombre2] = valeurTmp;
         }
 
         /// <summary>
