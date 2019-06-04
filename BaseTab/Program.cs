@@ -7,6 +7,7 @@
  * Email        : alexandre.morel@divtec.ch
  */
 
+using BaseTab.Trie;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,9 +16,6 @@ namespace BaseTab
 {
     class Program
     {
-        // Nombre de possibilté du menu
-        static int nbrPosMenu = 20;
-
         // Variables pour la configuration par défaut
         static int quantiteValeur = 100;
         static int maximumValeur = 100;
@@ -99,10 +97,6 @@ namespace BaseTab
                     saisieIncorrect = true;
                 }
 
-                if (choix <= 0 | choix > nbrPosMenu) { saisieIncorrect = true; }
-
-                if (saisieIncorrect) { AfficherErreur("Saisie incorrect !"); }
-
             } while (saisieIncorrect);
 
             return choix;
@@ -116,6 +110,9 @@ namespace BaseTab
         {
             switch (choix)
             {
+                default:
+                    quitter = false;
+                    break;
                 case 1:
                     quantiteValeur = SaisieValeur();
                     quitter = false;
@@ -160,10 +157,9 @@ namespace BaseTab
                     quitter = false;
                     break;
                 case 20:
-                    // TrierChrono();
+                    TrierChrono();
                     quitter = false;
                     break;
-                
             }
         }
 
@@ -223,190 +219,58 @@ namespace BaseTab
         {
             AfficherEnTete("TRIE DES VALEURS");
 
-            BubbleSort.TrierBulle(listValeurs);
+            BubbleSort.Trier(listValeurs);
 
-            Console.WriteLine("Tri à bulles terminé !");
+            Console.WriteLine("Trie à bulles terminé !");
 
             AfficherAppuyerContinuer();
         }
 
         static void TrierInsertion()
         {
-            TrierInsertion(listValeurs);
+            AfficherEnTete("TRIE DES VALEURS");
 
-            Console.WriteLine("Tri terminé !");
+            InsertionSort.Trier(listValeurs);
+
+            Console.WriteLine("Trie par insertion terminé !");
 
             AfficherAppuyerContinuer();
-        }
-
-        static void TrierInsertion(List<int> ar)
-        {
-            AfficherEnTete("TRI DES VALEURS");
-
-            int a, j, i;
-
-            for (i = 1; i < ar.Count; i ++)
-            {
-
-                a = ar[i];
-
-                for (j = i; j >= 0; j--)
-                {
-                    if (j == 0 || ar[j-1] < a)
-                    {
-                        ar[j] = a;
-                        break;
-                    } else if (ar[j- 1] > a)
-                    {
-                        ar[j] = ar[j - 1];
-                    }
-                }
-            }
         }
 
         static void TrierSelection()
         {
-            TrierSelection(listValeurs);
+            AfficherEnTete("TRIE DES VALEURS");
 
-            Console.WriteLine("Tri terminé !");
+            SelectionSort.Trier(listValeurs);
+
+            Console.WriteLine("Trie par selection terminé !");
 
             AfficherAppuyerContinuer();
-        }
-
-        static void TrierSelection(List<int> ar)
-        {
-            AfficherEnTete("TRI DES VALEURS");
-
-            int i, min, j, x;
-
-            for (i = 0; i < ar.Count - 1; i++)
-            {
-                min = i;
-
-                for (j = i + 1; j < ar.Count; j ++)
-                {
-                    if (ar[j] < ar[min] )
-                    {
-                        min = j;
-                    }
-                }
-
-                if (min != i)
-                {
-                    x = ar[i];
-                    ar[i] = ar[min];
-                    ar[min] = x;
-                } 
-            }
         }
 
         static void TrierQuickShort()
         {
-            TrierQuickShort(listValeurs, 0, listValeurs.Count - 1);
+            AfficherEnTete("TRIE DES VALEURS");
 
-            Console.WriteLine("Tri terminé !");
+            QuickSort.Trier(listValeurs);
+
+            Console.WriteLine("Trie QuickSort terminé !");
 
             AfficherAppuyerContinuer();
-        }
-
-        static void TrierQuickShort(List<int> arr, int gauche, int droite)
-        {
-            List<int> pivot;
-
-            if (gauche < droite)
-            {
-                pivot = Partition(arr, gauche, droite);
-
-                if (pivot[1] > gauche)
-                {
-                    TrierQuickShort(arr, gauche, pivot[1]);
-                }
-                if (pivot[0] < droite)
-                {
-                    TrierQuickShort(arr, pivot[0], droite);
-                }
-            }
-        }
-
-        private static List<int> Partition(List<int> arr, int gauche, int droite)
-        {
-            int pivot = arr[(gauche + droite) / 2];
-            do
-            {
-                while (arr[gauche] < pivot && gauche <= droite)
-                {
-                    gauche++;
-                }
-
-                while (arr[droite] > pivot && gauche <= droite)
-                {
-                    droite--;
-                }
-
-                if (gauche <= droite)
-                {
-                    int temp = arr[droite];
-                    arr[droite] = arr[gauche];
-                    arr[gauche] = temp;
-
-                    gauche++;
-                    droite--;
-                }
-                    
-            } while (gauche <= droite);
-
-            List<int> tmp = new List<int>();
-            tmp.Add(gauche);
-            tmp.Add(droite);
-
-            return tmp;
         }
 
         static void TrierBinSort()
         {
-            AfficherEnTete("TRI DES VALEURS");
+            AfficherEnTete("TRIE DES VALEURS");
 
-            TrierBinSort(listValeurs);
+            BinSort.Trier(listValeurs, maximumValeur);
+
+            Console.WriteLine("Trie BinSort terminé !");
 
             AfficherAppuyerContinuer();
         }
 
-        static void TrierBinSort(List<int> ar)
-        {
-            List<int>[] arTrier = new List<int>[maximumValeur];
-
-            foreach (int valeur in ar)
-            {
-                List<int> arTmp = arTrier[valeur];
-
-                if (arTmp == null)
-                {
-                    arTmp = new List<int>();
-                    arTmp.Add(valeur);
-                    arTrier[valeur] = arTmp;
-                } else
-                {
-                    arTrier[valeur].Add(valeur);
-                }
-            }
-
-            ar.Clear();
-
-            foreach (List<int> lst in arTrier)
-            {
-                if (lst != null)
-                {
-                    foreach (int valeur in lst)
-                    {
-                        ar.Add(valeur);
-                    }
-                }
-            }
-
-            Console.WriteLine("Tri terminé !");
-        }
-
-        /* static void TrierChrono()
+        static void TrierChrono()
         {
             AfficherEnTete("CHRONOMETRE DES TRIS");
 
@@ -414,30 +278,36 @@ namespace BaseTab
             List<int> insertion = new List<int>(listValeurs);
             List<int> selection = new List<int>(listValeurs);
             List<int> quicksort = new List<int>(listValeurs);
+            List<int> binsort = new List<int>(listValeurs);
 
             System.Diagnostics.Stopwatch stopwatch = StartTimer();
-            TrierBulle(bulles);
+            BubbleSort.Trier(bulles);
             String resultatBulle = StopTimer(stopwatch);
 
             stopwatch = StartTimer();
-            TrierInsertion(insertion);
+            InsertionSort.Trier(insertion);
             String resultatInsertion = StopTimer(stopwatch);
 
             stopwatch = StartTimer();
-            TrierSelection(selection);
+            SelectionSort.Trier(selection);
             String resultatSelection = StopTimer(stopwatch);
 
             stopwatch = StartTimer();
-            TrierQuickShort(quicksort, 0, listValeurs.Count - 1);
+            QuickSort.Trier(quicksort);
             String resultatQuicksort = StopTimer(stopwatch);
 
-            Console.WriteLine("Tri à bulles terminé ! Tps : " + resultatBulle);
-            Console.WriteLine("Tri par insertion terminé ! Tps : " + resultatInsertion);
-            Console.WriteLine("Tri par sélection terminé ! Tps : " + resultatSelection);
-            Console.WriteLine("Tri quicksort terminé ! Tps : " + resultatQuicksort);
+            stopwatch = StartTimer();
+            QuickSort.Trier(binsort);
+            String resultatBinsort = StopTimer(stopwatch);
+
+            Console.WriteLine("Trie à bulles terminé ! Tps : " + resultatBulle);
+            Console.WriteLine("Trie par insertion terminé ! Tps : " + resultatInsertion);
+            Console.WriteLine("Trie par sélection terminé ! Tps : " + resultatSelection);
+            Console.WriteLine("Trie QuickSort terminé ! Tps : " + resultatQuicksort);
+            Console.WriteLine("Trie BinSort terminé ! Tps : " + resultatBinsort);
 
             AfficherAppuyerContinuer();
-        } */
+        }
 
         static System.Diagnostics.Stopwatch StartTimer()
         {
@@ -460,22 +330,18 @@ namespace BaseTab
         /// </summary>
         static void AfficherNombre()
         {
-            AfficherEnTete("AFFICHAGE DES VALEURS");   // Affiche l'en-tête
+            AfficherEnTete("AFFICHAGE DES VALEURS");
 
-            bool premVal = true;    // Variable pour l'affichage de la première valeur.
-            int tempColonne = colonneValeur; // Nombre de colonne
+            bool premVal = true;
+            int tempColonne = colonneValeur;
 
-            // Boucle pour l'affichage des valeurs
             foreach (int valeur in listValeurs)
             {
-                // Si c'est la première valeur, pas le mêmes affichage
                 if (premVal) { Console.Write(" {0}", valeur); } else { Console.Write("\t {0}", valeur); }
 
                 premVal = false;
                 tempColonne--;
 
-                // Si c'est la dernière colonne et que les valeurs ne sont pas terminer,
-                // réinitilise la variable des colonnes et joute une ligne
                 if (tempColonne == 0)
                 {
                     tempColonne = colonneValeur;
@@ -484,7 +350,7 @@ namespace BaseTab
                 }
             }
 
-            AfficherAppuyerContinuer(); // Demande l'appuie d'une touche pour continuer
+            AfficherAppuyerContinuer();
         }
 
         /// <summary>
@@ -492,15 +358,13 @@ namespace BaseTab
         /// </summary>
         static void AfficherEnTete(string titre)
         {
-            Console.Clear();    // Nettoie la console
+            Console.Clear();
 
-            // Affiche l'en-tête
             Console.WriteLine("*************************************************************************");
             Console.WriteLine("*   Morel Alexandre               ExBaseTab               Version 1.1   *");
             Console.WriteLine("*************************************************************************");
             Console.WriteLine();
 
-            // Affiche le titre de la page
             StringBuilder sb = new StringBuilder();
             sb.Append(' ', ((73 - titre.Length) / 2));
             sb.Append(titre);
@@ -514,9 +378,9 @@ namespace BaseTab
         /// <param name="message">Message d'erreur à afficher</param>
         static void AfficherErreur(string message)
         {
-            Console.ForegroundColor = ConsoleColor.DarkRed; // Change la couleur en rouge
-            Console.WriteLine(message); // Affiche le message
-            Console.ResetColor();   // Reset la couleur de la console
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine(message);
+            Console.ResetColor();
         }
 
         /// <summary>

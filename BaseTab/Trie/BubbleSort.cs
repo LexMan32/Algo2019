@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace BaseTab
+namespace BaseTab.Trie
 {
     public class BubbleSort
     {
- 
-        public static void TrierBulle(List<int> listValeurs)
+        public static void Trier(List<int> valeurs)
         {
             bool valeurEchange;
 
@@ -17,11 +12,11 @@ namespace BaseTab
             {
                 valeurEchange = false;
 
-                for (int index = 0; index < listValeurs.Count - 1; index++)
+                for (int index = 0; index < valeurs.Count - 1; index++)
                 {
-                    if (listValeurs[index] > listValeurs[index + 1])
+                    if (valeurs[index] > valeurs[index + 1])
                     {
-                        PermuterNombre(listValeurs, index, index + 1);
+                        PermuterNombre(valeurs, index, index + 1);
 
                         valeurEchange = true;
                     }
@@ -29,11 +24,11 @@ namespace BaseTab
             } while (valeurEchange == true);
         }
 
-        private static void PermuterNombre(List<int> listValeurs, int indexNombre1, int indexNombre2)
+        private static void PermuterNombre(List<int> valeurs, int indexNombre1, int indexNombre2)
         {
-            int valeurTmp = listValeurs[indexNombre1];
-            listValeurs[indexNombre1] = listValeurs[indexNombre2];
-            listValeurs[indexNombre2] = valeurTmp;
+            int valeurTmp = valeurs[indexNombre1];
+            valeurs[indexNombre1] = valeurs[indexNombre2];
+            valeurs[indexNombre2] = valeurTmp;
         }
 
     }
