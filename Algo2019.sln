@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseTab", "BaseTab\BaseTab.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuiteFibonacci", "SuiteFibonacci\SuiteFibonacci.csproj", "{364874FD-854D-4E0E-89FC-388D9B0F74ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestImplList", "TestImplList\TestImplList.csproj", "{A573EE27-8970-440B-A52B-7F7E57BC0AFB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{364874FD-854D-4E0E-89FC-388D9B0F74ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{364874FD-854D-4E0E-89FC-388D9B0F74ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{364874FD-854D-4E0E-89FC-388D9B0F74ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A573EE27-8970-440B-A52B-7F7E57BC0AFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A573EE27-8970-440B-A52B-7F7E57BC0AFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A573EE27-8970-440B-A52B-7F7E57BC0AFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A573EE27-8970-440B-A52B-7F7E57BC0AFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
