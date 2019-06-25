@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestImplList
 {
@@ -10,9 +6,36 @@ namespace TestImplList
     {
         static void Main(string[] args)
         {
-            Liste lst = new Liste();
+            PileFiFo lst = new PileFiFo();
 
-            lst.ajouterDebut(15);
+            lst.ajouterValeur(10);
+            lst.ajouterValeur(15);
+            lst.ajouterValeur(20);
+            lst.ajouterValeur(25);
+            lst.ajouterValeur(30);
+            lst.ajouterValeur(35);
+
+            lst.afficher();
+
+            Console.WriteLine();
+
+            lst.supprimerValeur();
+            lst.supprimerValeur();
+            lst.supprimerValeur();
+
+            lst.afficher();
+
+            Console.WriteLine();
+
+            lst.ajouterValeur(50);
+            lst.ajouterValeur(55);
+            lst.ajouterValeur(60);
+
+            lst.afficher();
+
+            Console.WriteLine();
+
+            lst.supprimerToutesLesValeurs();
 
             lst.afficher();
 
