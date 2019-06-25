@@ -1,10 +1,5 @@
-﻿using Microsoft.Analytics.Interfaces;
-using Microsoft.Analytics.Types.Sql;
-using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System;
 using System.Linq;
-using System.Text;
 
 namespace TestImplList
 {
@@ -16,19 +11,27 @@ namespace TestImplList
 
         public Liste()
         {
-            valeurs = new int[0];
+            valeurs = new int[LongMax];
+            dernier = -1;
         }
 
         public void ajouterDebut(int valeur)
         {
-            Array.Resize<int>(ref valeurs, valeurs.Count());
+            if (dernier == -1) {
+                valeurs[0] = valeur;
+            } else {
+                for (int index = dernier; index >= 0; index++)
+                {
+                    valeurs[index + 1] = valeurs[index];
+                    valeurs[0] = valeur;
+                }
+            }
+            dernier++;
         }
 
-        public 
-
-        public bool estListeVide()
+        public bool estVide()
         {
-            if (this.valeurs.Count() == 0)
+            if (dernier == -1)
             {
                 return true;
             }
@@ -39,6 +42,14 @@ namespace TestImplList
         public int compterElement()
         {
             return this.valeurs.Count();
+        }
+
+        public void afficher()
+        {
+            for (int i = 0; i < dernier; i++)
+            {
+                Console.WriteLine("Index {0} -> {1}", i, valeurs[i]);
+            }
         }
 
         public int getPremiereValeur()

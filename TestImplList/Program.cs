@@ -10,6 +10,14 @@ namespace TestImplList
     {
         static void Main(string[] args)
         {
+            Liste lst = new Liste();
+
+            lst.ajouterDebut(15);
+
+            lst.afficher();
+
+            Console.ReadKey();
+
         }
     }
 }
