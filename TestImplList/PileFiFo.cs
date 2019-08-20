@@ -12,10 +12,11 @@ namespace TestImplList
 
         private int[] valeurs;
         private int dernier;
-        private int valeurMax = 20;
+        private int valeurMax;
 
-        public PileFiFo()
+        public PileFiFo(int tailleMax)
         {
+            valeurMax = tailleMax;
             valeurs = new int[valeurMax];
 
             dernier = 0;

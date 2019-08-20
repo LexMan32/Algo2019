@@ -6,38 +6,33 @@ namespace TestImplList
     {
         static void Main(string[] args)
         {
-            PileFiFo lst = new PileFiFo();
+            Queue queue = new Queue(5);
 
-            lst.ajouterValeur(10);
-            lst.ajouterValeur(15);
-            lst.ajouterValeur(20);
-            lst.ajouterValeur(25);
-            lst.ajouterValeur(30);
-            lst.ajouterValeur(35);
+            queue.deposerValeur(10);
+            queue.deposerValeur(15);
+            queue.deposerValeur(20);
+            queue.deposerValeur(25);
 
-            lst.afficher();
+            queue.afficher();
 
             Console.WriteLine();
 
-            lst.supprimerValeur();
-            lst.supprimerValeur();
-            lst.supprimerValeur();
+            queue.preleverValeur();
+            queue.preleverValeur();
+            queue.preleverValeur();
 
-            lst.afficher();
-
-            Console.WriteLine();
-
-            lst.ajouterValeur(50);
-            lst.ajouterValeur(55);
-            lst.ajouterValeur(60);
-
-            lst.afficher();
+            queue.afficher();
 
             Console.WriteLine();
 
-            lst.supprimerToutesLesValeurs();
+            queue.deposerValeur(50);
+            queue.deposerValeur(55);
+            queue.deposerValeur(60);
+            queue.deposerValeur(65);
 
-            lst.afficher();
+            queue.afficher();
+
+            Console.WriteLine();
 
             Console.ReadKey();
 
