@@ -36,6 +36,17 @@ namespace TestImplList
 
             Console.ReadKey();
 
+            QueueNoeud test = new QueueNoeud();
+
+            test.deposer(10);
+            test.deposer(20);
+            test.deposer(30);
+            test.deposer(40);
+
+
+
+            Console.ReadKey();
+
         }
     }
 }
