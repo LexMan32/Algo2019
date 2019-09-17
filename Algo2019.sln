@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuiteFibonacci", "SuiteFibo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestImplList", "TestImplList\TestImplList.csproj", "{A573EE27-8970-440B-A52B-7F7E57BC0AFB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestImplTable", "TestImplTable\TestImplTable.csproj", "{D1DC81A7-2DC5-4BD0-AE2D-231A264F3C3F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{A573EE27-8970-440B-A52B-7F7E57BC0AFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A573EE27-8970-440B-A52B-7F7E57BC0AFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A573EE27-8970-440B-A52B-7F7E57BC0AFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1DC81A7-2DC5-4BD0-AE2D-231A264F3C3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1DC81A7-2DC5-4BD0-AE2D-231A264F3C3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1DC81A7-2DC5-4BD0-AE2D-231A264F3C3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1DC81A7-2DC5-4BD0-AE2D-231A264F3C3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
