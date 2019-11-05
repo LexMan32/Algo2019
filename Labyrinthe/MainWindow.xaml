@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Labyrinthe"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="500">
-    <Grid>
-        <Canvas Name="grille" Margin="10"/>
+        Title="MainWindow" SizeToContent="WidthAndHeight">
+    <Border BorderBrush="Black" BorderThickness="5">
+        <Canvas Name="GameArea" ClipToBounds="True" Width="550" Height="550">
 
-    </Grid>
+        </Canvas>
+    </Border>
 </Window>

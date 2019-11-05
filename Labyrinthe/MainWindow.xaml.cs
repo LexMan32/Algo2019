@@ -20,16 +20,43 @@ namespace Labyrinthe
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Canvas canvas;
+        const int QUARE_SIZE = 25;
+
+        List<Case> listCase;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            canvas = (Canvas)FindName("grille");
+            GenerateGrid();
 
-            List<Position> grille = new List<Position>();
-            for (int i = 0; i == 50; i++)
+            DrawLabyrinth();
+
+            BuildLabyrinth();
+        }
+
+        private void GenerateGrid()
+        {
+            int nbrCase = (int)GameArea.Width / QUARE_SIZE;
+            nbrCase = nbrCase * nbrCase;
+
+            for (int i = 0; i == nbrCase; i++)
+            {
+                listCase.Add(new Case());
+            }
+        }
+
+        private void BuildLabyrinth()
+        {
+
+        }
+
+        private void DrawLabyrinth()
+        {
+            int indexX = 0;
+            int indexY = 0;
+
+            foreach (Case iCase in listCase)
             {
 
             }
