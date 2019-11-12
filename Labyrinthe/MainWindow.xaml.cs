@@ -20,7 +20,8 @@ namespace Labyrinthe
     /// </summary>
     public partial class MainWindow : Window
     {
-        const int QUARE_SIZE = 25;
+        const int QUARE_SIZE = 50;
+        const int BORDER_THIN = 5;
 
         List<Case> listCase;
 
@@ -39,8 +40,9 @@ namespace Labyrinthe
         {
             int nbrCase = (int)GameArea.Width / QUARE_SIZE;
             nbrCase = nbrCase * nbrCase;
+            listCase = new List<Case>();
 
-            for (int i = 0; i == nbrCase; i++)
+            for (int i = 0; i != nbrCase; i++)
             {
                 listCase.Add(new Case());
             }
@@ -48,17 +50,70 @@ namespace Labyrinthe
 
         private void BuildLabyrinth()
         {
+            int nbrCase = (int)GameArea.Width / QUARE_SIZE;
+
+            int indexX = 0;
+            int indexY = 0;
+
 
         }
 
         private void DrawLabyrinth()
         {
+            int nbrCase = (int)GameArea.Width / QUARE_SIZE;
+
             int indexX = 0;
             int indexY = 0;
 
             foreach (Case iCase in listCase)
             {
+                if (indexX == nbrCase)
+                {
+                    indexY++;
+                    indexX = 0;
+                }
 
+                foreach (Wall wall in iCase.ListWalls)
+                {
+                    Rectangle rect = new Rectangle();
+                    rect.Stroke = new SolidColorBrush(Colors.Black);
+                    rect.Fill = new SolidColorBrush(Colors.Black);
+
+                    switch (wall)
+                    {
+                        case Wall.DOWN:
+                            rect.Width = QUARE_SIZE;
+                            rect.Height = BORDER_THIN;
+                            Canvas.SetLeft(rect, (indexX * QUARE_SIZE));
+                            Canvas.SetTop(rect, (indexY * QUARE_SIZE) + (QUARE_SIZE - BORDER_THIN));
+                            break;
+
+                        case Wall.UP:
+                            rect.Width = QUARE_SIZE;
+                            rect.Height = BORDER_THIN;
+                            Canvas.SetLeft(rect, (indexX * QUARE_SIZE));
+                            Canvas.SetTop(rect, (indexY * QUARE_SIZE));
+                            break;
+
+                        case Wall.LEFT:
+                            rect.Width = BORDER_THIN;
+                            rect.Height = QUARE_SIZE;
+                            Canvas.SetLeft(rect, (indexX * QUARE_SIZE));
+                            Canvas.SetTop(rect, (indexY * QUARE_SIZE));
+                            break;
+
+                        case Wall.RIGHT:
+                            rect.Width = BORDER_THIN;
+                            rect.Height = QUARE_SIZE;
+                            Canvas.SetLeft(rect, (indexX * QUARE_SIZE) + (QUARE_SIZE - BORDER_THIN));
+                            Canvas.SetTop(rect, (indexY * QUARE_SIZE));
+                            break;
+                    }
+
+                    GameArea.Children.Add(rect);
+                } 
+
+                indexX++;
             }
         }
     }

@@ -14,6 +14,8 @@ namespace Labyrinthe
 
         public Case()
         {
+
+            ListWalls = new List<Wall>();
             ListWalls.Add(Wall.DOWN);
             ListWalls.Add(Wall.UP);
             ListWalls.Add(Wall.RIGHT);

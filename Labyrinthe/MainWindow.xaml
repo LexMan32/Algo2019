@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" SizeToContent="WidthAndHeight">
     <Border BorderBrush="Black" BorderThickness="5">
-        <Canvas Name="GameArea" ClipToBounds="True" Width="550" Height="550">
+        <Canvas Name="GameArea" ClipToBounds="True" Width="500" Height="500">
 
         </Canvas>
     </Border>
